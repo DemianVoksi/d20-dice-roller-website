@@ -5,6 +5,7 @@ import { BiDownArrow, BiUpArrow } from 'react-icons/bi';
 
 type DieCardProps = {
 	identity: number;
+	die: number;
 	children: ReactNode;
 };
 

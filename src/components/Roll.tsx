@@ -7,7 +7,13 @@ export const Roll = () => {
 
 	return (
 		<Box marginTop='25px'>
-			<Button margin='10px' color='offWhite' bg='cremeDark' w='100px'>
+			<Button
+				margin='10px'
+				color='offWhite'
+				bg='cremeDark'
+				w='100px'
+				onClick={() => values?.getResultsOfAllDies()}
+			>
 				Roll
 			</Button>
 			<Button
