@@ -78,8 +78,10 @@ export const ContextProvider = ({ children }: UserContextProviderProps) => {
 			d20Results,
 			d100Results
 		];
-		setRollResult(allResults);
-		console.log(allResults);
+
+		const allResultsFiltered = allResults.filter((result) => result[0][1] != 0);
+		setRollResult(allResultsFiltered);
+		console.log(allResultsFiltered);
 	};
 
 	return (
