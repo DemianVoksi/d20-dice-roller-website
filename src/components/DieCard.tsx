@@ -1,33 +1,43 @@
-import { Box, Text } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import { SiteContext } from '@/utils/ContextProvider';
+import { Flex, Text } from '@chakra-ui/react';
+import { ReactNode, useContext } from 'react';
 import { BiDownArrow, BiUpArrow } from 'react-icons/bi';
 
 type DieCardProps = {
+	identity: number;
 	children: ReactNode;
 };
 
 export const DieCard = (props: DieCardProps) => {
-	const handleOnClick = () => {
-		console.log('arrow clicked');
-	};
+	const values = useContext(SiteContext);
 
 	return (
-		<Box
-			bg='grayDark'
-			color='redLight'
-			display='flex'
-			flexDirection='column'
-			justifyContent='center'
-			alignItems='center'
+		<Flex
+			bg='offWhite'
+			color='black'
+			direction={{ xl: 'column', lg: 'row', md: 'row', sm: 'row' }}
+			justify='center'
+			align='center'
+			marginTop='60px'
 			h='30vh'
-			w='15vh'
+			w='20vh'
 		>
 			{props.children}
-			<BiUpArrow size='15%' onClick={handleOnClick} color='cremeLight' />
-			<Text color='cremeLight' fontSize='20px'>
-				0
-			</Text>
-			<BiDownArrow size='15%' color='cremeLight' />
-		</Box>
+			<Flex direction='column' justify='center' align='center'>
+				<BiUpArrow
+					size='40%'
+					onClick={() => values?.handleIncrement(props.identity)}
+					color='black'
+				/>
+				<Text color='black' fontSize='20px'>
+					{values?.diceNumbers[props.identity]}
+				</Text>
+				<BiDownArrow
+					size='38%'
+					color='black'
+					onClick={() => values?.handleDecrement(props.identity)}
+				/>
+			</Flex>
+		</Flex>
 	);
 };
