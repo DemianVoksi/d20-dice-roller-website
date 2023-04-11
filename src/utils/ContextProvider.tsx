@@ -7,23 +7,29 @@ type UserContextProviderProps = {
 type ValueTypes = {
 	diceNumbers: number[];
 	setDiceNumbers: React.Dispatch<React.SetStateAction<number[]>>;
-	rollResult: (string | (number | number[])[])[][] | null;
+	rollResult: DiceNumbersObject[] | null;
 	setRollResult: React.Dispatch<
-		React.SetStateAction<(string | (number | number[])[])[][] | null>
+		React.SetStateAction<DiceNumbersObject[] | null>
 	>;
 	handleIncrement: (index: number) => void;
 	handleDecrement: (index: number) => void;
 	handleReset: () => void;
 	getResultsOfAllDies: () => void;
+	getDieTotal: (dieArray: number[], dieSides: number) => (number | number[])[];
+	getDieArray: (numOfDies: number) => number[];
+};
+
+type DiceNumbersObject = {
+	roll: number[];
+	rollNumber: number;
+	dieType: string;
 };
 
 export const SiteContext = createContext<ValueTypes | null>(null);
 
 export const ContextProvider = ({ children }: UserContextProviderProps) => {
 	let [diceNumbers, setDiceNumbers] = useState<number[]>([0, 0, 0, 0, 0, 0, 0]);
-	let [rollResult, setRollResult] = useState<
-		(string | (number | number[])[])[][] | null
-	>(null);
+	let [rollResult, setRollResult] = useState<DiceNumbersObject[] | null>(null);
 
 	const handleIncrement = (index: number) => {
 		let tempNums = [...diceNumbers];
@@ -33,7 +39,11 @@ export const ContextProvider = ({ children }: UserContextProviderProps) => {
 
 	const handleDecrement = (index: number) => {
 		let tempNums = [...diceNumbers];
-		tempNums[index] -= 1;
+		if (tempNums[index] <= 0) {
+			tempNums[index] = 0;
+		} else {
+			tempNums[index] -= 1;
+		}
 		setDiceNumbers(tempNums);
 	};
 
@@ -58,28 +68,77 @@ export const ContextProvider = ({ children }: UserContextProviderProps) => {
 		toLoopOver.forEach(() => dieResults.push(getRandomNumber(dieSides)));
 		let dieTotal =
 			dieResults.length > 0 ? dieResults.reduce((a, b) => a + b) : 0;
-		return [dieResults, dieTotal];
+		return dieResults;
 	};
 
 	const getResultsOfAllDies = () => {
-		const d4Results = [getDieTotal(getDieArray(diceNumbers[0]), 4), 'd4'];
-		const d6Results = [getDieTotal(getDieArray(diceNumbers[1]), 6), 'd6'];
-		const d8Results = [getDieTotal(getDieArray(diceNumbers[2]), 8), 'd8'];
-		const d10Results = [getDieTotal(getDieArray(diceNumbers[3]), 10), 'd10'];
-		const d12Results = [getDieTotal(getDieArray(diceNumbers[4]), 12), 'd12'];
-		const d20Results = [getDieTotal(getDieArray(diceNumbers[5]), 20), 'd20'];
-		const d100Results = [getDieTotal(getDieArray(diceNumbers[6]), 100), 'd100'];
+		// const d4Results = [getDieTotal(getDieArray(diceNumbers[0]), 4), 'd4'];
+		// const d6Results = [getDieTotal(getDieArray(diceNumbers[1]), 6), 'd6'];
+		// const d8Results = [getDieTotal(getDieArray(diceNumbers[2]), 8), 'd8'];
+		// const d10Results = [getDieTotal(getDieArray(diceNumbers[3]), 10), 'd10'];
+		// const d12Results = [getDieTotal(getDieArray(diceNumbers[4]), 12), 'd12'];
+		// const d20Results = [getDieTotal(getDieArray(diceNumbers[5]), 20), 'd20'];
+		// const d100Results = [getDieTotal(getDieArray(diceNumbers[6]), 100), 'd100'];
+
+		const d4Result = getDieTotal(getDieArray(diceNumbers[0]), 4);
+		const d6Result = getDieTotal(getDieArray(diceNumbers[1]), 6);
+		const d8Result = getDieTotal(getDieArray(diceNumbers[2]), 8);
+		const d10Result = getDieTotal(getDieArray(diceNumbers[3]), 10);
+		const d12Result = getDieTotal(getDieArray(diceNumbers[4]), 12);
+		const d20Result = getDieTotal(getDieArray(diceNumbers[5]), 20);
+		const d100Result = getDieTotal(getDieArray(diceNumbers[6]), 100);
+
+		const d4Object: DiceNumbersObject = {
+			roll: d4Result,
+			rollNumber: d4Result.length > 0 ? d4Result.reduce((a, b) => a + b) : 0,
+			dieType: 'd4'
+		};
+
+		const d6Object: DiceNumbersObject = {
+			roll: d6Result,
+			rollNumber: d6Result.length > 0 ? d6Result.reduce((a, b) => a + b) : 0,
+			dieType: 'd6'
+		};
+		const d8Object: DiceNumbersObject = {
+			roll: d8Result,
+			rollNumber: d8Result.length > 0 ? d8Result.reduce((a, b) => a + b) : 0,
+			dieType: 'd8'
+		};
+		const d10Object: DiceNumbersObject = {
+			roll: d10Result,
+			rollNumber: d10Result.length > 0 ? d10Result.reduce((a, b) => a + b) : 0,
+			dieType: 'd10'
+		};
+		const d12Object: DiceNumbersObject = {
+			roll: d12Result,
+			rollNumber: d12Result.length > 0 ? d12Result.reduce((a, b) => a + b) : 0,
+			dieType: 'd12'
+		};
+		const d20Object: DiceNumbersObject = {
+			roll: d20Result,
+			rollNumber: d20Result.length > 0 ? d20Result.reduce((a, b) => a + b) : 0,
+			dieType: 'd20'
+		};
+		const d100Object: DiceNumbersObject = {
+			roll: d100Result,
+			rollNumber:
+				d100Result.length > 0 ? d100Result.reduce((a, b) => a + b) : 0,
+			dieType: 'd100'
+		};
+
 		const allResults = [
-			d4Results,
-			d6Results,
-			d8Results,
-			d10Results,
-			d12Results,
-			d20Results,
-			d100Results
+			d4Object,
+			d6Object,
+			d8Object,
+			d10Object,
+			d12Object,
+			d20Object,
+			d100Object
 		];
 
-		const allResultsFiltered = allResults.filter((result) => result[0][1] != 0);
+		const allResultsFiltered = allResults.filter(
+			(result) => result.rollNumber != 0
+		);
 		setRollResult(allResultsFiltered);
 		console.log(allResultsFiltered);
 	};
@@ -94,7 +153,9 @@ export const ContextProvider = ({ children }: UserContextProviderProps) => {
 				handleIncrement,
 				handleDecrement,
 				handleReset,
-				getResultsOfAllDies
+				getResultsOfAllDies,
+				getDieTotal,
+				getDieArray
 			}}
 		>
 			{children}

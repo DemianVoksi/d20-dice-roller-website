@@ -1,6 +1,7 @@
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { MainContent } from '@/components/MainContent';
+import { RollInfo } from '@/components/RollInfo';
 import styles from '@/styles/Home.module.css';
 import { Inter } from 'next/font/google';
 import Head from 'next/head';
@@ -20,6 +21,7 @@ export default function Home() {
 				<Header />
 				<MainContent />
 				<Footer />
+				<RollInfo />
 			</main>
 		</>
 	);
