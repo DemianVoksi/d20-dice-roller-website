@@ -20,8 +20,8 @@ export default function Home() {
 			<main className={styles.main}>
 				<Header />
 				<MainContent />
-				<Footer />
 				<RollInfo />
+				<Footer />
 			</main>
 		</>
 	);

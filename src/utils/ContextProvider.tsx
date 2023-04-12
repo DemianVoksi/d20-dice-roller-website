@@ -19,9 +19,9 @@ type ValueTypes = {
 	getDieArray: (numOfDies: number) => number[];
 };
 
-type DiceNumbersObject = {
+export type DiceNumbersObject = {
 	roll: number[];
-	rollNumber: number;
+	rollTotal: number;
 	dieType: string;
 };
 
@@ -33,7 +33,11 @@ export const ContextProvider = ({ children }: UserContextProviderProps) => {
 
 	const handleIncrement = (index: number) => {
 		let tempNums = [...diceNumbers];
-		tempNums[index] += 1;
+		if (tempNums[index] >= 30) {
+			tempNums[index] = 30;
+		} else {
+			tempNums[index] += 1;
+		}
 		setDiceNumbers(tempNums);
 	};
 
@@ -66,20 +70,10 @@ export const ContextProvider = ({ children }: UserContextProviderProps) => {
 		let dieResults: number[] = [];
 		const toLoopOver: number[] = dieArray;
 		toLoopOver.forEach(() => dieResults.push(getRandomNumber(dieSides)));
-		let dieTotal =
-			dieResults.length > 0 ? dieResults.reduce((a, b) => a + b) : 0;
 		return dieResults;
 	};
 
 	const getResultsOfAllDies = () => {
-		// const d4Results = [getDieTotal(getDieArray(diceNumbers[0]), 4), 'd4'];
-		// const d6Results = [getDieTotal(getDieArray(diceNumbers[1]), 6), 'd6'];
-		// const d8Results = [getDieTotal(getDieArray(diceNumbers[2]), 8), 'd8'];
-		// const d10Results = [getDieTotal(getDieArray(diceNumbers[3]), 10), 'd10'];
-		// const d12Results = [getDieTotal(getDieArray(diceNumbers[4]), 12), 'd12'];
-		// const d20Results = [getDieTotal(getDieArray(diceNumbers[5]), 20), 'd20'];
-		// const d100Results = [getDieTotal(getDieArray(diceNumbers[6]), 100), 'd100'];
-
 		const d4Result = getDieTotal(getDieArray(diceNumbers[0]), 4);
 		const d6Result = getDieTotal(getDieArray(diceNumbers[1]), 6);
 		const d8Result = getDieTotal(getDieArray(diceNumbers[2]), 8);
@@ -90,39 +84,38 @@ export const ContextProvider = ({ children }: UserContextProviderProps) => {
 
 		const d4Object: DiceNumbersObject = {
 			roll: d4Result,
-			rollNumber: d4Result.length > 0 ? d4Result.reduce((a, b) => a + b) : 0,
+			rollTotal: d4Result.length > 0 ? d4Result.reduce((a, b) => a + b) : 0,
 			dieType: 'd4'
 		};
 
 		const d6Object: DiceNumbersObject = {
 			roll: d6Result,
-			rollNumber: d6Result.length > 0 ? d6Result.reduce((a, b) => a + b) : 0,
+			rollTotal: d6Result.length > 0 ? d6Result.reduce((a, b) => a + b) : 0,
 			dieType: 'd6'
 		};
 		const d8Object: DiceNumbersObject = {
 			roll: d8Result,
-			rollNumber: d8Result.length > 0 ? d8Result.reduce((a, b) => a + b) : 0,
+			rollTotal: d8Result.length > 0 ? d8Result.reduce((a, b) => a + b) : 0,
 			dieType: 'd8'
 		};
 		const d10Object: DiceNumbersObject = {
 			roll: d10Result,
-			rollNumber: d10Result.length > 0 ? d10Result.reduce((a, b) => a + b) : 0,
+			rollTotal: d10Result.length > 0 ? d10Result.reduce((a, b) => a + b) : 0,
 			dieType: 'd10'
 		};
 		const d12Object: DiceNumbersObject = {
 			roll: d12Result,
-			rollNumber: d12Result.length > 0 ? d12Result.reduce((a, b) => a + b) : 0,
+			rollTotal: d12Result.length > 0 ? d12Result.reduce((a, b) => a + b) : 0,
 			dieType: 'd12'
 		};
 		const d20Object: DiceNumbersObject = {
 			roll: d20Result,
-			rollNumber: d20Result.length > 0 ? d20Result.reduce((a, b) => a + b) : 0,
+			rollTotal: d20Result.length > 0 ? d20Result.reduce((a, b) => a + b) : 0,
 			dieType: 'd20'
 		};
 		const d100Object: DiceNumbersObject = {
 			roll: d100Result,
-			rollNumber:
-				d100Result.length > 0 ? d100Result.reduce((a, b) => a + b) : 0,
+			rollTotal: d100Result.length > 0 ? d100Result.reduce((a, b) => a + b) : 0,
 			dieType: 'd100'
 		};
 
@@ -137,7 +130,7 @@ export const ContextProvider = ({ children }: UserContextProviderProps) => {
 		];
 
 		const allResultsFiltered = allResults.filter(
-			(result) => result.rollNumber != 0
+			(result) => result.rollTotal != 0
 		);
 		setRollResult(allResultsFiltered);
 		console.log(allResultsFiltered);
