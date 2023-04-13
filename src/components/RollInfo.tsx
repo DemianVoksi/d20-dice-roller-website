@@ -29,7 +29,14 @@ export const RollInfo = () => {
 							{result.roll.map((item, index) => (
 								<Text key={index}>{`${item},${' '}`}&nbsp;</Text>
 							))}{' '}
-							and the roll total was: {result.rollTotal}
+							and the roll total was: {result.rollTotal}.&nbsp;
+							{values.modifier
+								? `After applying a modifier of ${
+										values.modifier
+								  }, the roll total was: ${
+										result.rollTotal + Number(values.modifier)
+								  }`
+								: ''}
 						</Flex>
 					</Flex>
 				))}

@@ -16,28 +16,47 @@ export const DieCard = (props: DieCardProps) => {
 		<Flex
 			bg='offWhite'
 			color='black'
-			direction={{ xl: 'column', lg: 'row', md: 'row', sm: 'row' }}
 			justify='center'
 			align='center'
 			marginTop='60px'
 			h='30vh'
 			w='20vh'
 		>
-			{props.children}
-			<Flex direction='column' justify='center' align='center'>
-				<BiUpArrow
-					size='40%'
-					onClick={() => values?.handleIncrement(props.identity)}
-					color='black'
-				/>
-				<Text color='black' fontSize='20px'>
-					{values?.diceNumbers[props.identity]}
-				</Text>
-				<BiDownArrow
-					size='38%'
-					color='black'
-					onClick={() => values?.handleDecrement(props.identity)}
-				/>
+			<Flex direction={{ xl: 'column', lg: 'row', md: 'row', sm: 'row' }}>
+				<Flex justify='center' align='flex-end'>
+					{props.children}
+				</Flex>
+				<Flex direction='column' justify='center' align='center' h='16vh'>
+					<Flex
+						justify='center'
+						align='flex-end'
+						color='black'
+						_hover={{ color: 'redLight' }}
+					>
+						<BiUpArrow
+							size='60%'
+							color='currentColor'
+							onClick={() => values?.handleIncrement(props.identity)}
+						/>
+					</Flex>
+					<Flex justify='center' align='center'>
+						<Text color='black' fontSize='20px'>
+							{values?.diceNumbers[props.identity]}
+						</Text>
+					</Flex>
+					<Flex
+						justify='center'
+						align='flex-start'
+						color='black'
+						_hover={{ color: 'redLight' }}
+					>
+						<BiDownArrow
+							size='60%'
+							color='currentColor'
+							onClick={() => values?.handleDecrement(props.identity)}
+						/>
+					</Flex>
+				</Flex>
 			</Flex>
 		</Flex>
 	);

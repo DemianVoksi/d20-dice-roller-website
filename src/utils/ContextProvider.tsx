@@ -11,6 +11,8 @@ type ValueTypes = {
 	setRollResult: React.Dispatch<
 		React.SetStateAction<DiceNumbersObject[] | null>
 	>;
+	modifier: number | null;
+	setModifier: React.Dispatch<React.SetStateAction<number | null>>;
 	handleIncrement: (index: number) => void;
 	handleDecrement: (index: number) => void;
 	handleReset: () => void;
@@ -30,6 +32,7 @@ export const SiteContext = createContext<ValueTypes | null>(null);
 export const ContextProvider = ({ children }: UserContextProviderProps) => {
 	let [diceNumbers, setDiceNumbers] = useState<number[]>([0, 0, 0, 0, 0, 0, 0]);
 	let [rollResult, setRollResult] = useState<DiceNumbersObject[] | null>(null);
+	let [modifier, setModifier] = useState<number | null>(null);
 
 	const handleIncrement = (index: number) => {
 		let tempNums = [...diceNumbers];
@@ -54,6 +57,8 @@ export const ContextProvider = ({ children }: UserContextProviderProps) => {
 	const handleReset = () => {
 		setDiceNumbers([0, 0, 0, 0, 0, 0, 0]);
 	};
+
+	const handleModifier = () => {};
 
 	const getRandomNumber = (dieNum: number): number => {
 		let rand = 1 + Math.random() * dieNum;
@@ -143,6 +148,8 @@ export const ContextProvider = ({ children }: UserContextProviderProps) => {
 				setDiceNumbers,
 				rollResult,
 				setRollResult,
+				modifier,
+				setModifier,
 				handleIncrement,
 				handleDecrement,
 				handleReset,
