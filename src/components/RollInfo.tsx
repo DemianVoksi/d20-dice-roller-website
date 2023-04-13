@@ -4,6 +4,7 @@ import { useContext } from 'react';
 
 export const RollInfo = () => {
 	const values = useContext(SiteContext);
+	const modifierNum = Number(values?.modifier);
 
 	if (!values?.rollResult) {
 		return <Text></Text>;
@@ -30,13 +31,11 @@ export const RollInfo = () => {
 								<Text key={index}>{`${item},${' '}`}&nbsp;</Text>
 							))}{' '}
 							and the roll total was: {result.rollTotal}.&nbsp;
-							{values.modifier
-								? `After applying a modifier of ${
-										values.modifier
-								  }, the roll total was: ${
-										result.rollTotal + Number(values.modifier)
-								  }`
-								: ''}
+							{isNaN(modifierNum)
+								? ''
+								: `After applying a modifier of ${modifierNum}, the roll total was: ${
+										result.rollTotal + modifierNum
+								  }`}
 						</Flex>
 					</Flex>
 				))}

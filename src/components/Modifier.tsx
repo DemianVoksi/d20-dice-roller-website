@@ -9,10 +9,10 @@ export const Modifier = () => {
 		<Flex>
 			<FormControl>
 				<Input
-					type='number'
+					type='text'
 					placeholder='Enter modifier'
 					value={values?.modifier!}
-					onChange={(e) => values?.setModifier(Number(e.target.value))}
+					onChange={(e) => values?.setModifier(e.target.value)}
 				/>
 			</FormControl>
 		</Flex>
