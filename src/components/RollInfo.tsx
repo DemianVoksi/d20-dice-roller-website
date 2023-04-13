@@ -12,20 +12,34 @@ export const RollInfo = () => {
 		return (
 			<Flex
 				direction='column'
+				align={{
+					xl: 'center',
+					lg: 'center',
+					md: 'flex-start',
+					sm: 'flex-start'
+				}}
 				justify='center'
-				align='center'
+				marginTop={{ sm: '30px' }}
 				h='100%'
 				fontSize={20}
 				flexGrow={1}
 			>
 				{values?.rollResult.map((result, index) => (
-					<Flex key={index} margin='3px'>
+					<Flex
+						key={index}
+						margin='3px'
+						direction={{ xl: 'row', lg: 'column', md: 'column', sm: 'column' }}
+						borderBottom={{ xl: 'none', sm: '1px solid black' }}
+					>
 						<Text>
 							You have thrown {result.roll.length}
 							{result.dieType} {result.roll.length === 1 ? 'die' : 'dies'}
 							.&nbsp;
 						</Text>
-						<Flex>
+						<Flex
+							direction={{ xl: 'row', lg: 'row', md: 'row', sm: 'row' }}
+							wrap='wrap'
+						>
 							Your result was:&nbsp;
 							{result.roll.map((item, index) => (
 								<Text key={index}>{`${item},${' '}`}&nbsp;</Text>

@@ -19,11 +19,14 @@ export const DieCard = (props: DieCardProps) => {
 			justify='center'
 			align='center'
 			marginTop='60px'
-			h='30vh'
-			w='20vh'
+			h={{ xl: '30vh', lg: '15vh', md: '15vh', sm: '10vh' }}
+			w={{ xl: '20vh', lg: '20vh', md: '20vh', sm: '30vh' }}
 		>
 			<Flex direction={{ xl: 'column', lg: 'row', md: 'row', sm: 'row' }}>
-				<Flex justify='center' align='flex-end'>
+				<Flex
+					justify={{ xl: 'center', lg: 'center', md: 'cener', sm: 'center' }}
+					align={{ xl: 'flex-end', lg: 'center', md: 'center', sm: 'center' }}
+				>
 					{props.children}
 				</Flex>
 				<Flex direction='column' justify='center' align='center' h='16vh'>

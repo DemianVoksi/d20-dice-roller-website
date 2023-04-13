@@ -10,7 +10,7 @@ export const Modifier = () => {
 	};
 
 	return (
-		<Flex>
+		<Flex marginTop={{ lg: '15px', md: '15px', sm: '15px' }}>
 			<FormControl>
 				<Input
 					type='text'

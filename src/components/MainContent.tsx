@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { AiOutlinePercentage } from 'react-icons/ai';
 import {
 	GiD10,
@@ -16,7 +16,7 @@ import { Roll } from './Roll';
 export const MainContent = () => {
 	return (
 		<Flex direction='column' align='center' justify='center'>
-			<Box display='flex' flexDirection='row'>
+			<Flex direction={{ xl: 'row', lg: 'column', md: 'column', sm: 'column' }}>
 				<DieCard identity={0} die={4}>
 					<GiD4 size='50%' title='d4' />
 				</DieCard>
@@ -38,7 +38,7 @@ export const MainContent = () => {
 				<DieCard identity={6} die={100}>
 					<AiOutlinePercentage size='50%' title='d100' />
 				</DieCard>
-			</Box>
+			</Flex>
 			<Modifier />
 			<Roll />
 		</Flex>
