@@ -3,7 +3,11 @@ import { Flex, FormControl, Input } from '@chakra-ui/react';
 import { useContext } from 'react';
 
 export const Modifier = () => {
-	const values = useContext(SiteContext);
+	const values = useContext(SiteContext)!;
+
+	const handleModifier = (e: React.ChangeEvent<HTMLInputElement>) => {
+		values.setModifier(e.target.value);
+	};
 
 	return (
 		<Flex>
@@ -11,8 +15,8 @@ export const Modifier = () => {
 				<Input
 					type='text'
 					placeholder='Enter modifier'
-					value={values?.modifier!}
-					onChange={(e) => values?.setModifier(e.target.value)}
+					value={values?.modifier || ''}
+					onChange={handleModifier}
 				/>
 			</FormControl>
 		</Flex>

@@ -3,10 +3,10 @@ import { Flex, Text } from '@chakra-ui/react';
 import { useContext } from 'react';
 
 export const RollInfo = () => {
-	const values = useContext(SiteContext);
-	const modifierNum = Number(values?.modifier);
+	const values = useContext(SiteContext)!;
+	// const modifierNum = Number(values?.modifier);
 
-	if (!values?.rollResult) {
+	if (values?.rollResult) {
 		return <Text></Text>;
 	} else
 		return (
@@ -31,11 +31,11 @@ export const RollInfo = () => {
 								<Text key={index}>{`${item},${' '}`}&nbsp;</Text>
 							))}{' '}
 							and the roll total was: {result.rollTotal}.&nbsp;
-							{isNaN(modifierNum)
+							{/* {modifierNum
 								? ''
 								: `After applying a modifier of ${modifierNum}, the roll total was: ${
 										result.rollTotal + modifierNum
-								  }`}
+								  }`} */}
 						</Flex>
 					</Flex>
 				))}
