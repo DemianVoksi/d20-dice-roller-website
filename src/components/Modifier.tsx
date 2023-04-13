@@ -6,7 +6,7 @@ export const Modifier = () => {
 	const values = useContext(SiteContext)!;
 
 	const handleModifier = (e: React.ChangeEvent<HTMLInputElement>) => {
-		values.setModifier(e.target.value);
+		values?.setModifier(e.target.value);
 	};
 
 	return (
@@ -15,8 +15,9 @@ export const Modifier = () => {
 				<Input
 					type='text'
 					placeholder='Enter modifier'
-					value={values?.modifier || ''}
-					onChange={handleModifier}
+					maxLength={4}
+					value={values?.modifier!}
+					onChange={(e) => handleModifier(e)}
 				/>
 			</FormControl>
 		</Flex>

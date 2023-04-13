@@ -9,6 +9,7 @@ import {
 	GiPerspectiveDiceSix
 } from 'react-icons/gi';
 import { DieCard } from './DieCard';
+// import { Modifier } from './Modifier';
 import { Modifier } from './Modifier';
 import { Roll } from './Roll';
 
