@@ -56,8 +56,6 @@ export const ContextProvider = ({ children }: UserContextProviderProps) => {
 		setDiceNumbers([0, 0, 0, 0, 0, 0, 0]);
 	};
 
-	const handleModifier = () => {};
-
 	const getRandomNumber = (dieNum: number): number => {
 		let rand = 1 + Math.random() * dieNum;
 		rand = Math.floor(rand);

@@ -7,7 +7,7 @@ export const RollInfo = () => {
 	const modifierNum = Number(values?.modifier);
 
 	if (!values?.rollResult) {
-		return <Text>What</Text>;
+		return <Text></Text>;
 	} else
 		return (
 			<Flex

@@ -23,7 +23,7 @@ export const Roll = () => {
 				w='100px'
 				onClick={() => values?.handleReset()}
 			>
-				Reset all
+				Reset dice
 			</Button>
 		</Box>
 	);
