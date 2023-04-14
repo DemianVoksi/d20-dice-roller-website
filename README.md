@@ -10,3 +10,5 @@ Made with:
 - Next.js
 - Chakra UI
 - React Icons
+
+Available at: https://d20-dice-roller.vercel.app/
